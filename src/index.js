@@ -20,7 +20,7 @@ app.listen(3000, async () => {
     //  const tweets = await Tweet.findById('65c9c23d07150a6521560319')
    //tweet.userEmail='lm@kit.com'
    //await  tweet.save()
-              const tweetrepo = new TweetRepository();
+  const tweetrepo = new TweetRepository();
             //   const tweet = await tweetrepo.create({content :"testing tweet"})
             //   tweet.comments.push({content :'working'})
             //   console.log(tweet)
@@ -32,8 +32,11 @@ app.listen(3000, async () => {
 //  tweet.comments.push(comment)
 //  await tweet.save()
 
-const tweet = await tweetrepo.getwithComments('65ca0323df2bb2aab9b51bfa')
- console.log(tweet) 
+//const tweet = await tweetrepo.getwithComments('65ca0323df2bb2aab9b51bfa')
+const tweet = await tweetrepo.getAll(0,)
+console.log(tweet[2].contentwithEmail)   //through virtual
+
+//console.log(tweet) 
 
 
 })   

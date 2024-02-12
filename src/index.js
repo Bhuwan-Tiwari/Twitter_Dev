@@ -33,10 +33,10 @@ app.listen(3000, async () => {
 //  await tweet.save()
 
 //const tweet = await tweetrepo.getwithComments('65ca0323df2bb2aab9b51bfa')
-const tweet = await tweetrepo.getAll(0,)
-console.log(tweet[2].contentwithEmail)   //through virtual
-
-//console.log(tweet) 
+// const tweet = await tweetrepo.getAll(0,)
+// console.log(tweet[2].contentwithEmail)   //through virtual
 
 
+const tweet = await tweetrepo.create({content :'with hooks now'})
+console.log(tweet) 
 })   

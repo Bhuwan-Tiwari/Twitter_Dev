@@ -6,13 +6,13 @@ const tweetschema = new mongoose.Schema({
         required :true,
         max:[250,'Tweet cannot be more than 250 characters']
     },
-  hashtags:{
+  hashtags:[
+    {
     type:mongoose.Schema.Types.ObjectId,
-    ref:'Hashtag'
+    ref:"Hashtag"
   }
-
+]
 },{timestamps: true})
-
 
 const Tweet = mongoose.model("Tweet", tweetschema)
 module.exports = Tweet

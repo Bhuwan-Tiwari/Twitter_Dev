@@ -1,5 +1,5 @@
-const {TweetRepository,HashtagRepository}= require('../repository/index')
-
+import {TweetRepository,HashtagRepository} from '../repository/index.js'
+//here we are exporting like an object thats y we are getting it like an object
 class TweetService{
     constructor()
     {
@@ -32,7 +32,7 @@ class TweetService{
        return tweet
     }
 }
-module.exports= TweetService
+export default TweetService
 
 
 /*

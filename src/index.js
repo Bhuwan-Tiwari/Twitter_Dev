@@ -1,16 +1,18 @@
 import express from'express'
 import {connect} from'./config/database.js'
+import apiRoutes from './routes/index.js'
+import bodyParser  from 'body-parser'
+
 const app = express()
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true}))
 
-import TweetService from './services/tweet-service.js'
-
+app.use('/api',apiRoutes)
 
 app.listen(3000, async () => {
     console.log('Server started')
     await connect();//connecting to the database
     console.log('Mongodb connected')
-    const tweetservice= new TweetService()
-    const tweet = await tweetservice.create({content :'we arre in the fake world everyone is #FAke playing  #mInd game'})
-   console.log(tweet)
+    
     
 })   

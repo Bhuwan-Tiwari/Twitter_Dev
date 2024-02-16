@@ -3,7 +3,8 @@ import mongoose from 'mongoose'
 const hashtagSchema= new mongoose.Schema({
     title:{
         type:String,
-        require:true
+        require:true,
+        unique: true
     },
     tweets:[
         {
@@ -13,5 +14,10 @@ const hashtagSchema= new mongoose.Schema({
     ]
 },{timestamps:true})
 
+// hashtagSchema.pre('save',function(next)
+// {
+//     this.title.toLowerCase()
+//     next();
+// })
 const Hashtag = mongoose.model("Hashtag",hashtagSchema)
 export default Hashtag; 

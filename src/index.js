@@ -10,7 +10,7 @@ app.listen(3000, async () => {
     await connect();//connecting to the database
     console.log('Mongodb connected')
     const tweetservice= new TweetService()
-    const tweet = await tweetservice.create({content :'Bhuwan will create a empire #technology  #mind ,it is going to be #fun #inovation #badminton'})
+    const tweet = await tweetservice.create({content :'we arre in the fake world everyone is #FAke playing  #mInd game'})
    console.log(tweet)
     
 })   

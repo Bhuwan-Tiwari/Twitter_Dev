@@ -36,6 +36,16 @@ class TweetRepository extends CrudRepository
             console.log(error)
         }
     }
+
+    async find(id)
+    {
+        try {
+            const tweet = await Tweet.findById(id).populate({path:'likes'})  //give mongoose query object as it is present in mongo db 
+             return tweet                                                     //populate function is mongoose funtion work only on mongoose object 
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
 
 export default TweetRepository

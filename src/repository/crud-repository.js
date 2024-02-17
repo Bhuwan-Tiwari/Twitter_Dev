@@ -6,7 +6,7 @@ class CrudRepository {
     async create(data)
     {
         try {
-            const result= this.model.create(data)
+            const result= await this.model.create(data)
             return result
         } catch (error) {
             console.log("somethimg went wrong in crud repo")
@@ -17,7 +17,7 @@ class CrudRepository {
     async destroy(id)
     {
         try {
-            const result= this.model.findByIdAndDelete(id)
+            const result= await this.model.findByIdAndDelete(id)
             return result
         } catch (error) {
             console.log("somethimg went wrong in crud repo")
@@ -28,17 +28,17 @@ class CrudRepository {
     async get(id)
     {
         try {
-            const result= this.model.findById(id)
+            const result= await this.model.findById(id)
             return result
         } catch (error) {
             console.log("somethimg went wrong in crud repo")
             throw error
         }
     }
-    async getAll(id)
+    async getAll()
     {
         try {
-            const result= this.model.findById({})
+            const result= await this.model.findById({})
             return result
         } catch (error) {
             console.log("somethimg went wrong in crud repo")
@@ -48,7 +48,7 @@ class CrudRepository {
     async update(id,data)
     {
         try {
-            const result= this.model.findByIdAndUpdate(id,data,{new :true}) //we use new to to return updated document as by default it  returns the old one
+            const result= await this.model.findByIdAndUpdate(id,data,{new :true}) //we use new to to return updated document as by default it  returns the old one
 
             return result
         } catch (error) {

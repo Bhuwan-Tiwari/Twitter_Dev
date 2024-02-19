@@ -21,7 +21,10 @@ class TweetRepository extends CrudRepository
     async getwithComments(id)
     {
         try {
-            const tweet = await Tweet.findById(id).populate({path:'comments'}).lean() //comments attribute of model
+            const tweet = await Tweet.findById(id).populate({path:'comments'
+        ,populate:{
+            path:'comments'
+        }}).lean() //comments attribute of model
             return tweet  //we use lean to get js object other than mongoosh object.its an optimisation
         } catch (error) {
             console.log(error)

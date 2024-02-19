@@ -1,5 +1,4 @@
-const mongoose = require('mongoose')
-
+import mongoose from "mongoose"
 const commentschema = new mongoose.Schema({
     content: {
         type: String,
@@ -8,7 +7,7 @@ const commentschema = new mongoose.Schema({
     onModel: {
         type: String,
         require: true,
-        enum: ['Tweet', 'comment']   //if we have to reffer more than on model we use enum other than ref
+        enum: ['Tweet','Comment']   //if we have to reffer more than on model we use enum other than ref
     },
     commentable: {
         type: mongoose.Schema.Types.ObjectId,
@@ -20,8 +19,15 @@ const commentschema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',   //reffer to userid
         required: true
-    }
+    },
+    comments:[
+        {
+            type : mongoose.Schema.Types.ObjectId,
+            
+            ref :  'Comment'
+        }
+    ]
 }, { timestamps: true })
 
 const Comment = mongoose.model("Comment", commentschema)
-module.exports = Comment
+export default Comment

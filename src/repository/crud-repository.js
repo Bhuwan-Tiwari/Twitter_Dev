@@ -9,7 +9,7 @@ class CrudRepository {
             const result= await this.model.create(data)
             return result
         } catch (error) {
-            console.log("somethimg went wrong in crud repo")
+            console.log("somethimg went wrong in crud repo1")
             throw error
         }
     }
@@ -31,7 +31,7 @@ class CrudRepository {
             const result= await this.model.findById(id)
             return result
         } catch (error) {
-            console.log("somethimg went wrong in crud repo")
+            console.log("somethimg went wrong in crud repo2")
             throw error
         }
     }
@@ -49,7 +49,6 @@ class CrudRepository {
     {
         try {
             const result= await this.model.findByIdAndUpdate(id,data,{new :true}) //we use new to to return updated document as by default it  returns the old one
-
             return result
         } catch (error) {
             console.log("somethimg went wrong in crud repo")

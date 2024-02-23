@@ -26,6 +26,25 @@ try {
         err:error,
         message:"something went wrong"
     })
-}
+}}
+  export const login = async (req,res)=>
+  {
+    try {
+        const token = await userService.signin(req.body.email,req.body.password)
+        return res.status(200).json({
+            success:true,
+            data:token,
+            message:'sucessfully logged in',
+            err:{}
+           
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success:false,
+            data:{},
+            err:error,
+            message:"something went wrong"
+        })
+    }
+  }
 
-}

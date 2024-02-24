@@ -17,7 +17,12 @@ const tweetschema = new mongoose.Schema({
             type : mongoose.Schema.Types.ObjectId,
             ref :  'Comment'
         }
-    ]
+    ],
+    image:
+        {
+            type:String
+        }   //url of the image stored in aws s3
+    
 
 },{timestamps: true})
 

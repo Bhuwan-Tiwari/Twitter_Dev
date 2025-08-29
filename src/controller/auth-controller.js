@@ -30,6 +30,7 @@ try {
   export const login = async (req,res)=>
   {
     try {
+        console.log(req.body);
         const token = await userService.signin(req.body.email,req.body.password)
         return res.status(200).json({
             success:true,

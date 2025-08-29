@@ -32,6 +32,18 @@ class TweetService{
        
        return tweet
     }
+
+    async getFeed({ tweetsLimit = 20, tagsLimit = 10 }) {
+        // latest tweets and trending hashtags (by usage count)
+        const tweets = await this.tweetRepository.getRecent(tweetsLimit)
+        const trending = await this.hashtagRepository.getTrending(tagsLimit)
+        return { tweets, trending }
+    }
+
+    async getTweetWithComments(id) {
+        const tweet = await this.tweetRepository.getwithComments(id)
+        return tweet
+    }
 }
 export default TweetService
 

@@ -40,6 +40,15 @@ class TweetRepository extends CrudRepository
         }
     }
 
+    async getRecent(limit = 20) {
+        try {
+            const tweets = await Tweet.find().sort({ createdAt: -1 }).limit(limit)
+            return tweets
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     async find(id)
     {
         try {

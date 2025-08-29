@@ -12,8 +12,10 @@ try {
             return res.status(500).json({error:err})
         }
         console.log('Image url is',req.file)   //req.file from aws s3
-         const payload= {...req.body}        
-         payload.image=req.file.location       // req.file.loaction is having url of uploaded image in aws s3
+         const payload= {...req.body}  
+         if (req.file && req.file.location) {
+            payload.image = req.file.location       // req.file.location is url of uploaded image in aws s3
+         }
         const response = await tweetservice.create(payload)
         return res.status(201).json({
             success: true,
@@ -32,5 +34,43 @@ try {
         message:"something went wrong"
     })
 }
+}
+export const getFeed = async (req, res) => {
+  try {
+    const tweetsLimit = Number(req.query.tweetsLimit || 20)
+    const tagsLimit = Number(req.query.tagsLimit || 10)
+    const response = await tweetservice.getFeed({ tweetsLimit, tagsLimit })
+    return res.status(200).json({
+      success: true,
+      data: response,
+      err: {},
+      message: 'successfully fetched feed'
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success:false,
+      data:{},
+      err:error,
+      message:"something went wrong"
+    })
+  }
+}
 
+export const getTweet = async (req, res) => {
+  try {
+    const tweet = await tweetservice.getTweetWithComments(req.params.id)
+    return res.status(200).json({
+      success: true,
+      data: tweet,
+      err: {},
+      message: 'successfully fetched tweet'
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success:false,
+      data:{},
+      err:error,
+      message:"something went wrong"
+    })
+  }
 }

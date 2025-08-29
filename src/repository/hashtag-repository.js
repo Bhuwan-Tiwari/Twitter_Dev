@@ -56,6 +56,20 @@ class HashtagRepository
         }
     }
     
+    async getTrending(limit = 10) {
+        try {
+            // trending by number of tweets referencing the tag
+            const tags = await Hashtag.aggregate([
+                { $project: { title: 1, count: { $size: { $ifNull: ['$tweets', []] } } } },
+                { $sort: { count: -1 } },
+                { $limit: limit }
+            ])
+            return tags
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
 }
 
 export default HashtagRepository

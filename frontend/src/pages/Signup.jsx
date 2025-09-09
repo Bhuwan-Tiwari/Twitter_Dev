@@ -38,9 +38,9 @@ const Signup = () => {
       await login(email, password)
       showSnackbar('Account created successfully!', 'success')
       setTimeout(() => navigate('/'), 1000)
-    } catch (err) {
+    } catch (error) {
       setError('Signup failed. Please try again.')
-      showSnackbar('Signup failed. Please check your information.', 'error')
+      showSnackbar('Signup failed. Please check your information.', 'error',error.response.data.message)
     } finally {
       setLoading(false)
     }
@@ -55,7 +55,7 @@ const Signup = () => {
       <AppBar position="static" sx={{ background: 'linear-gradient(45deg, #1DA1F2 30%, #0D8BD9 90%)' }}>
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-            🐦 Twitter Clone
+            🐦 Tweet Tweet 
           </Typography>
         </Toolbar>
       </AppBar>

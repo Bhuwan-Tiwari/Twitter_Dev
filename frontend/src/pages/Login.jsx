@@ -36,9 +36,9 @@ const Login = () => {
       await login(email, password)
       showSnackbar('Login successful!', 'success')
       setTimeout(() => navigate('/'), 1000)
-    } catch (err) {
+    } catch (error) {
       setError('Invalid email or password')
-      showSnackbar('Login failed. Please check your credentials.', 'error')
+      showSnackbar('Login failed. Please check your credentials.', 'error',error.response.data.message)
     } finally {
       setLoading(false)
     }
@@ -53,7 +53,7 @@ const Login = () => {
       <AppBar position="static" sx={{ background: 'linear-gradient(45deg, #1DA1F2 30%, #0D8BD9 90%)' }}>
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-            🐦 Twitter Clone
+           🐦 Tweet Tweet 
           </Typography>
         </Toolbar>
       </AppBar>

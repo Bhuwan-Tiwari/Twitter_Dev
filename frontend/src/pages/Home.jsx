@@ -163,7 +163,7 @@ const Home = () => {
         showSnackbar('Comment deleted successfully!', 'success')
       }
     } catch (error) {
-      showSnackbar('Failed to delete', 'error')
+      showSnackbar('Failed to delete','error',error.response.data.message)
     }
     handleMenuClose()
   }
@@ -187,7 +187,7 @@ const Home = () => {
       setEditItem(null)
       setEditText('')
     } catch (error) {
-      showSnackbar('Failed to update', 'error')
+      showSnackbar('Failed to update', 'error',error.response.data.message)
     }
   }
 
@@ -219,7 +219,7 @@ const Home = () => {
       <AppBar position="static" sx={{ background: 'linear-gradient(45deg, #1DA1F2 30%, #0D8BD9 90%)' }}>
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 'bold' }}>
-            🐦 Twitter Clone
+          🐦 Tweet Tweet  
           </Typography>
           {token ? (
             <Stack direction="row" spacing={2} alignItems="center">

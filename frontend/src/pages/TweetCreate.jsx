@@ -67,9 +67,9 @@ const TweetCreate = () => {
       setImagePreview(null)
       showSnackbar('Tweet posted successfully!', 'success')
       setTimeout(() => navigate('/'), 1500)
-    } catch (err) {
+    } catch(error) {
       setError('Failed to create tweet')
-      showSnackbar('Failed to create tweet', 'error')
+      showSnackbar('Failed to create tweet',"error", error.response.data.message)
     } finally {
       setLoading(false)
     }

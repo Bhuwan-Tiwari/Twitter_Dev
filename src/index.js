@@ -8,7 +8,17 @@ import passport  from 'passport'
 
 
 const app = express()
-app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
+const corsOptions = {
+    origin: "http://localhost:5173",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    optionsSuccessStatus: 200
+  }
+  
+  app.use(cors(corsOptions))
+  
+ app.options('*', cors(corsOptions))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 
@@ -20,14 +30,6 @@ app.use('/api',apiRoutes)
 
 app.listen(3000, async () => {
     console.log('Server started')
-    await connect();//connecting to the database
+    await connect();
     console.log('Mongodb connected')
-    
-//     const  tweetrepo=new TweetRepository()
-//    const users = await user.find()
-//    const tweets = await tweetrepo.getAll(0,10)
-//    const likeservice = new LikeService()
-//    const response = await  likeservice.toggleLike(tweets[0].id,'Tweet',users[0].id)
-//    console.log("response from index.js",response)
-
-})   
+    })   

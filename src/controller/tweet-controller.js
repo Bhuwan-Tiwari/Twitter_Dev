@@ -12,7 +12,7 @@ try {
             return res.status(500).json({error:err})
         }
         console.log('Image url is',req.file)   //req.file from aws s3
-         const payload= {...req.body}  
+         const payload= {...req.body, userId: req.user.id}  // Add userId to payload
          if (req.file && req.file.location) {
             payload.image = req.file.location       // req.file.location is url of uploaded image in aws s3
          }
@@ -71,6 +71,44 @@ export const getTweet = async (req, res) => {
       data:{},
       err:error,
       message:"something went wrong"
+    })
+  }
+}
+
+export const deleteTweet = async (req, res) => {
+  try {
+    await tweetservice.deleteTweet(req.params.id, req.user.id)
+    return res.status(200).json({
+      success: true,
+      data: {},
+      err: {},
+      message: 'successfully deleted tweet'
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: {},
+      err: error,
+      message: error.message || "something went wrong"
+    })
+  }
+}
+
+export const updateTweet = async (req, res) => {
+  try {
+    const response = await tweetservice.updateTweet(req.params.id, req.user.id, req.body)
+    return res.status(200).json({
+      success: true,
+      data: response,
+      err: {},
+      message: 'successfully updated tweet'
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: {},
+      err: error,
+      message: error.message || "something went wrong"
     })
   }
 }

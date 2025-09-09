@@ -29,6 +29,28 @@ class CommentService {
         return comment
     }
 
+    async deleteComment(commentId, userId) {
+        const comment = await this.CommenRepository.get(commentId)
+        if (!comment) {
+            throw new Error('Comment not found')
+        }
+        if (comment.userId.toString() !== userId.toString()) {
+            throw new Error('Unauthorized to delete this comment')
+        }
+        return await this.CommenRepository.destroy(commentId)
+    }
+
+    async updateComment(commentId, userId, updateData) {
+        const comment = await this.CommenRepository.get(commentId)
+        if (!comment) {
+            throw new Error('Comment not found')
+        }
+        if (comment.userId.toString() !== userId.toString()) {
+            throw new Error('Unauthorized to edit this comment')
+        }
+        return await this.CommenRepository.update(commentId, updateData)
+    }
+
 }
 
 export default CommentService

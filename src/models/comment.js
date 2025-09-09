@@ -1,5 +1,10 @@
 import mongoose from "mongoose"
 const commentschema = new mongoose.Schema({
+    name:{
+        type:String,
+        required:true,
+        default:"Anonymous"
+    },
     content: {
         type: String,
         required: true

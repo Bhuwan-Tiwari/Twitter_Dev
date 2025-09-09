@@ -49,3 +49,22 @@ try {
     }
   }
 
+export const getMe = async (req, res) => {
+  try {
+    const user = await userService.getUserById(req.user.id)
+    return res.status(200).json({
+      success: true,
+      data: user,
+      err: {},
+      message: 'successfully fetched user data'
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      data: {},
+      err: error,
+      message: "something went wrong"
+    })
+  }
+}
+

@@ -21,10 +21,16 @@ class TweetRepository extends CrudRepository
     async getwithComments(id)
     {
         try {
-            const tweet = await Tweet.findById(id).populate({path:'comments'
-        ,populate:{
-            path:'comments'
-        }}).lean() //comments attribute of model
+            const tweet = await Tweet.findById(id)
+                .populate('userId', 'name email') // Populate tweet user
+                .populate({
+                    path: 'comments',
+                    populate: {
+                        path: 'userId',
+                        select: 'name email' // Populate comment users
+                    }
+                })
+                .lean() //comments attribute of model
             return tweet  //we use lean to get js object other than mongoosh object.its an optimisation
         } catch (error) {
             console.log(error)
@@ -42,10 +48,14 @@ class TweetRepository extends CrudRepository
 
     async getRecent(limit = 20) {
         try {
-            const tweets = await Tweet.find().sort({ createdAt: -1 }).limit(limit)
+            const tweets = await Tweet.find()
+                .populate('userId', 'name email') // Populate user information
+                .sort({ createdAt: -1 })
+                .limit(limit)
             return tweets
         } catch (error) {
-            console.log(error)
+            console.log('Error in getRecent:', error)
+            return []
         }
     }
 

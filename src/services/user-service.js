@@ -47,6 +47,15 @@ async signin(email,password)
     }
 }
 
+async getUserById(userId) {
+    try {
+        const user = await this.userRepository.get(userId)
+        return user
+    } catch (error) {
+        throw error
+    }
+}
+
 }
 
 export default UserService

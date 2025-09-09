@@ -12,6 +12,29 @@ export const AuthProvider = ({ children }) => {
     else localStorage.removeItem('token')
   }, [token])
 
+  // Fetch user data when token is available
+  useEffect(() => {
+    const fetchUser = async () => {
+      if (token) {
+        try {
+          // You'll need to create a /me endpoint in your backend
+          const { data } = await api.get('/me')
+          setUser(data.data)
+        } catch (error) {
+          console.error('Failed to fetch user data:', error)
+          // If token is invalid, clear it
+          if (error.response?.status === 401) {
+            setToken(null)
+            setUser(null)
+          }
+        }
+      } else {
+        setUser(null)
+      }
+    }
+    fetchUser()
+  }, [token])
+
   const signup = async (payload) => {
     const { data } = await api.post('/signup', payload)
     return data
